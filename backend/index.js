@@ -11,7 +11,6 @@ const uploadBufferToCloudinary  = require("./utils/cloudinaryUpload");
 
 dotenv.config()
 const app = express()
-const PORT = process.env.POST || 5000;
 
 // Middlewares
 app.use(cors());
@@ -94,8 +93,8 @@ app.get("/scans", authenticateToken, (req, res) => {
     });
 })
 
-
+const PORT = process.env.PORT || 5000;
 // Start Server
 app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

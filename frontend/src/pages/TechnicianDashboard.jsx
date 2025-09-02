@@ -42,7 +42,7 @@ function TechnicianDashboard() {
         data.append("image", file);
 
         try{
-            const res = await fetch("http://localhost:5000/upload", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -54,6 +54,17 @@ function TechnicianDashboard() {
                 setMessage(result.message);
                 setImageUrl(result.imageUrl);
                 console.log(result);
+
+                // reset form data + file after form submission
+                setFormData({
+                  patientName: "",
+                  patientId: "",
+                  scanType: "",
+                  region: "",
+                });
+                setFile(null);
+                // Reset file input field (since React doesn't control it)
+                e.target.reset();
             } else {
                 setMessage("Error: " + (result.error || "Upload failed"));
             }

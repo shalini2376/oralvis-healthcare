@@ -10,18 +10,20 @@ function LoginPage(){
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        console.log("Trying login with:", email, password);
+        // console.log("Trying login with:", email, password);
         try{
-            const res = await axios.post("http://localhost:5000/login", {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
                 email,
                 password,
             })
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("role", res.data.role);
 
-            // Redirect based on role
-            console.log("Login response:", res.data);
+            setEmail("");
+            setPassword("");
+            // console.log("Login response:", res.data);
 
+            // Redirect based on role
             if (res.data.role === "Technician"){
                 navigate("/technician");
             } else if (res.data.role === "Dentist"){
@@ -29,7 +31,7 @@ function LoginPage(){
             }
         } catch(err) {
             setError("Invalid credentials");
-            console.log("Login  Err", err);
+            console.log("Login Err", err);
         }
     };
 

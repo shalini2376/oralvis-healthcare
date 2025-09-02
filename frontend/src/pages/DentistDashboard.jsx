@@ -10,15 +10,15 @@ function DentistDashboard() {
             const token = localStorage.getItem("token");
             
             try {
-                const res = await fetch("http://localhost:5000/scans", {
-                    headers: {Authorization: `Bearer ${token}`},
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/scans`, {
+                    headers: { Authorization: `Bearer ${token}` },
                 });
 
                 if (!res.ok){
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
                 const data = await res.json();
-                console.log("Scans from backend:", data)
+                // console.log("Scans from backend:", data)
                 setScans(data);
             } catch(err) {
                 console.error("Error fetching scans:", err)

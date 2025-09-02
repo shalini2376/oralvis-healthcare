@@ -50,6 +50,7 @@ The project demonstrates authentication, file handling, and role-based access co
 Follow these steps to run the project locally.
 
 ### 1. Clone the Repository
+```bash
 git clone https://github.com/shalini2376/oralvis-healthcare.git
 cd oralvis-healthcare
 

@@ -1,15 +1,18 @@
 import {useState} from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import {ClipLoader } from 'react-spinners';
 
 function LoginPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true)
         // console.log("Trying login with:", email, password);
         try{
             const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
@@ -32,6 +35,8 @@ function LoginPage(){
         } catch(err) {
             setError("Invalid credentials");
             console.log("Login Err", err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -48,10 +53,10 @@ function LoginPage(){
                     <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control" id="password" placeholder="Enter password" required />
                 </div>
                 <div className='d-flex justify-content-center align-items-center'>
-                    <button className='btn btn-primary w-50'>Login</button>
+                    <button className='btn btn-primary w-50'>{loading ? <ClipLoader color="#fff" /> : "Login"}</button>
                 </div>
             </form>
-            {error && <p className="error">{error}</p>}
+            {error && <p className="error text-danger mt-2 font-weight-bold">{error}</p>}
         </div>
     )
 }

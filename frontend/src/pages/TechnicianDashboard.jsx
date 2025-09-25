@@ -145,7 +145,7 @@ function TechnicianDashboard() {
         <button className="btn btn-primary mt-2" type="submit">Upload</button>
     </div>
     </form>
-    {message && <p>{message}</p>}
+    {message && <p className="text-success mt-2">{message}</p>}
     {imageUrl && (
         <div className="d-flex flex-column justify-content-center align-items-center">
           <p>Uploaded Image:</p>
